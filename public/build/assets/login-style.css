@@ -1,0 +1,419 @@
+:root {
+    --primary-blue-1: #0099ff;
+    --primary-blue-2: #00b7ff;
+    --primary-green: #28a745;
+    --primary-green-hover: #218838;
+    --light-bg: #f5f7fb;
+    --accent-coral: #ff6a4a;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", Arial, sans-serif;
+}
+
+/* ===== Animated education-style background ===== */
+body {
+    min-height: 100vh;
+    position: relative;
+    /*overflow: hidden;*/
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    background: radial-gradient(
+            circle at 10% 20%,
+            rgba(0, 153, 255, 0.3) 0,
+            transparent 45%
+        ),
+        radial-gradient(
+            circle at 80% 10%,
+            rgba(0, 183, 255, 0.25) 0,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 20% 90%,
+            rgba(255, 106, 74, 0.18) 0,
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(40, 167, 69, 0.3) 0,
+            transparent 55%
+        ),
+        #020712;
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    z-index: -2;
+    animation: move-bg 26s linear infinite alternate;
+}
+
+body::after {
+    mix-blend-mode: soft-light;
+    opacity: 0.35;
+    filter: blur(6px);
+    animation-duration: 38s;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes move-bg {
+    0% {
+        transform: translate3d(-20px, 0, 0) scale(1);
+    }
+    50% {
+        transform: translate3d(20px, -15px, 0) scale(1.02);
+    }
+    100% {
+        transform: translate3d(-10px, 15px, 0) scale(1.03);
+    }
+}
+
+/* small floating icons (books, caps) */
+.floating-icon {
+    position: fixed;
+    font-size: 22px;
+    opacity: 0.17;
+    color: #ffffff;
+    z-index: -1;
+    animation: floatUp 18s linear infinite;
+}
+.floating-icon:nth-of-type(1) {
+    left: 6%;
+    bottom: -10%;
+    animation-duration: 22s;
+}
+.floating-icon:nth-of-type(2) {
+    left: 28%;
+    bottom: -12%;
+    animation-duration: 19s;
+}
+.floating-icon:nth-of-type(3) {
+    left: 58%;
+    bottom: -14%;
+    animation-duration: 24s;
+}
+.floating-icon:nth-of-type(4) {
+    left: 82%;
+    bottom: -16%;
+    animation-duration: 20s;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.9);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.25;
+    }
+    50% {
+        transform: translate3d(-10px, -50vh, 0) scale(1);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate3d(10px, -100vh, 0) scale(1.1);
+        opacity: 0;
+    }
+}
+
+/* Top logo strip (NOT a header bar) */
+.page-banner {
+    width: 100%;
+    padding: 18px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.page-banner img {
+    max-width: 10%;
+    width: 90%;
+    height: 10%;
+}
+
+/* ===== Center card ===== */
+.auth-wrapper {
+    /* min-height: calc(100vh - 60px); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 15px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 980px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    overflow: hidden;
+}
+
+/* LEFT SIDE */
+.auth-left {
+    position: relative;
+    padding: 40px 35px;
+    background: linear-gradient(
+        135deg,
+        var(--primary-blue-1) 0,
+        var(--primary-blue-2) 50%,
+        #02101f 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+.auth-left img {
+    max-width: 270px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 24px;
+}
+.auth-left h2 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.auth-left p {
+    font-size: 13px;
+    opacity: 0.9;
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.btn-tutorial {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    font-size: 13px;
+    border-radius: 999px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #1f2933;
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    text-decoration: none;
+}
+.btn-tutorial span.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    color: #1f2933;
+    font-size: 11px;
+    margin-right: 8px;
+}
+.btn-tutorial:hover {
+    background: #111827;
+    text-decoration: none;
+}
+
+/* RIGHT SIDE */
+.auth-right {
+    padding: 48px 40px 32px;
+    background: var(--light-bg);
+    color: #222;
+    position: relative;
+}
+
+/* Logo at top center inside form */
+.auth-logo {
+    text-align: center;
+    margin-bottom: 18px;
+}
+.auth-logo img {
+    max-width: 100%;
+    width: 40%;
+    height: auto;
+    display: inline-block;
+}
+
+.return-main {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: var(--primary-blue-1);
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 12px;
+    border-bottom-left-radius: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+.return-main span.icon {
+    margin-right: 6px;
+    font-size: 16px;
+}
+
+.welcome-text {
+    margin-top: 6px;
+    margin-bottom: 22px;
+    text-align: left;
+}
+.welcome-text small {
+    font-size: 12px;
+    color: #777;
+}
+.welcome-text h3 {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 4px 0 0;
+    color: #333;
+}
+
+/* Inputs */
+.input-with-icon {
+    position: relative;
+    margin-bottom: 14px;
+}
+.input-with-icon .icon-box {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 42px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 15px;
+    border-right: 1px solid #dde3ee;
+}
+.input-with-icon input {
+    width: 100%;
+    padding: 10px 12px 10px 50px;
+    border-radius: 4px;
+    border: 1px solid #d1d9e6;
+    font-size: 14px;
+    background: #f0f4ff;
+    outline: none;
+    transition: all 0.15s ease;
+}
+.input-with-icon input:focus {
+    border-color: var(--primary-blue-1);
+    box-shadow: 0 0 0 2px rgba(0, 153, 255, 0.2);
+    background: #fff;
+}
+
+.show-pass {
+    display: flex;
+    align-items: center;
+    margin: 4px 0 12px;
+    font-size: 12px;
+    color: #555;
+}
+.show-pass input {
+    margin-right: 6px;
+}
+
+/* Buttons */
+.actions-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    margin-top: 4px;
+}
+
+.btn-login {
+    display: inline-block;
+    width: 150px;
+    padding: 9px 0;
+    border-radius: 999px;
+    border: 1px solid var(--primary-green);
+    background: var(--primary-green);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(40, 167, 69, 0.35);
+    text-decoration: none;
+}
+.btn-login:hover {
+    background: var(--primary-green-hover);
+    border-color: var(--primary-green-hover);
+}
+
+.forgot-link {
+    font-size: 12px;
+    color: var(--primary-blue-1);
+    text-decoration: none;
+}
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+/* Teacher & Student Registration buttons */
+.reg-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+.btn-reg {
+    flex: 1 1 48%;
+    padding: 9px 0;
+    border-radius: 999px;
+    border: 1px solid var(--primary-blue-1);
+    background: #fff;
+    color: var(--primary-blue-1);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 8px 18px rgba(0, 153, 255, 0.25);
+}
+.btn-reg.teacher {
+    border-color: var(--primary-blue-1);
+}
+.btn-reg.student {
+    border-color: var(--accent-coral);
+    color: var(--accent-coral);
+}
+.btn-reg:hover {
+    background: #f0f7ff;
+}
+
+/* Footer */
+.footer-text {
+    text-align: center;
+    font-size: 11px;
+    color: #ddd;
+    padding: 10px 0 18px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .auth-card {
+        grid-template-columns: 1fr;
+    }
+    .auth-left {
+        padding: 28px 24px;
+    }
+    .auth-right {
+        padding: 28px 22px 24px;
+    }
+    .return-main {
+        border-radius: 0 0 0 8px;
+    }
+}

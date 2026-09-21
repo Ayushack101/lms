@@ -1,0 +1,55 @@
+@media (max-width: 1024px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .phone-wrapper {
+    justify-content: flex-start;
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .breadcrumbs {
+    margin-left: 0;
+  }
+
+  .page {
+    padding: 12px 12px 24px;
+  }
+
+  .content {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-bar {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+
+  .phone {
+    width: 190px;
+    height: 380px;
+  }
+
+  .books-grid {
+    justify-content: center;
+  }
+}
