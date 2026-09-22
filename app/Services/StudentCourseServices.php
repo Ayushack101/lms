@@ -38,7 +38,7 @@ class StudentCourseServices
       return $class;
    }
 
-   public function getcontentsByTeacherId( int $teacher_id, int $subject_id, int $class_id)
+   public function getcontentsByTeacherId(int $teacher_id, int $subject_id, int $class_id)
    {
       $teacher = Teacher::findOrFail($teacher_id);
       $book = $teacher->books()->where('books.class_id', $class_id)->where('books.subject_id', $subject_id)->firstOrFail();

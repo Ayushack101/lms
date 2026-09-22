@@ -17,10 +17,8 @@ class TestQuestionsImport implements ToCollection, WithHeadingRow
 
     public function __construct($testTemplateId)
     {
-        $this->testTemplateId = $testTemplateId;
+        $this->testTemplateId = $testTemplateId; 
     }
-
-  
 
     public function collection(Collection $rows): void
     {

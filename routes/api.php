@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [AuthController::class, 'apiLogin'])->name('api.login');
 Route::get('boards', [BoardController::class, 'apiIndex']);
 Route::get('classes', [ClassesController::class, 'apiIndex']);
-Route::get('sections', [SectionController::class, 'apiIndex']);
+Route::get('sections/{class_id}', [SectionController::class, 'apiIndex']);
 Route::get('subjects/{board_id}', [SubjectController::class, 'apiIndex']);
 Route::get('books/{subject_id}', [BookController::class, 'apiIndex']);
 Route::post('teachers', [TeacherController::class, 'store']);
@@ -61,9 +61,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Teacher Assessment routes
     Route::controller(TeacherAssessmentController::class)->group(function () {
         Route::get('teacher/assigned-tests/subjects/{teacher_id}', 'subjects');
-        Route::get('teacher/assigned-tests/books/{teacher_id}/{subject_id}', 'books');
-        Route::get('teacher/assigned-tests/classes/{subject_id}/{teacher_id}', 'classes');
-        Route::get('teacher/assigned-tests/test-types/{book_id}', 'testTypes');
+        Route::get('teacher/assigned-tests/books/{subject_id}/{teacher_id}', 'books');
+        Route::get('teacher/assigned-tests/tests/{book_id}', 'tests');
         // assign assessment routes
         Route::post('teacher/assigned-tests/create', "AssignAssessment");
         Route::get('teacher/assigned-tests/all-assigned/{teacher_id}', 'getAssignedAssessments');

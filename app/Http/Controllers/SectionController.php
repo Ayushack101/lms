@@ -86,10 +86,9 @@ class SectionController extends Controller
     }
 
     // API methods
-
-    public function apiIndex()
+    public function apiIndex(int $id)
     {
-        $sections = $this->sectionService->all();
+        $sections = $this->sectionService->getSectionsByClass($id);
 
         return SectionResource::collection($sections);
     }
