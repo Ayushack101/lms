@@ -84,8 +84,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Teacher Assessment routes
     Route::controller(TeacherAssignmentController::class)->group(function () {
+     Route::get('teacher/assignments/subjects/{teacher_id}', 'subjects');
+     Route::get('teacher/assignments/books/{teacher_id}/{subject_id}', 'books');
+     Route::get('teacher/assignments/classes/{book_id}', 'class');
 
-    })
+     Route::get('teacher/assignments/all-assigned/{teacher_id}', 'getAssignedAssessments');
+     Route::get('teacher/assignments/questions/{assignment_id}', 'getAssignedQuestion');
+     Route::post('teacher/assignments/create', "assignAssignment");
+     Route::post('teacher/assignments/assigned/edit/{assignment_id}', 'editAssignedAssignment');
+     Route::get('teacher/assignments/assigned/delete/{assignment_id}', 'deleteAssignment');
+    });
+
 });
 
 

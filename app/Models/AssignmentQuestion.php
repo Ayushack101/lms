@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AssignmentQuestion extends Model
 {
     //
-    $table = 'assignment_questions';
+   protected  $table = 'assignment_questions';
     protected $fillable = [
         'assignment_id',
         'category',
@@ -16,7 +16,6 @@ class AssignmentQuestion extends Model
         'option_b',
         'option_c',
         'option_d',
-        'answer'
     ];
      public function assignment()
     {

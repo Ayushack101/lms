@@ -7,15 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class TeacherAssignment extends Model
 {
     //
-    $table = 'teacher_assignments';
+  protected   $table = 'teacher_assignments';
     protected $fillable = [
-                'title',
+                'assignment_name',
                 'teacher_id',
-                'subject_id', 'book_id',
+                'subject_id',
+                'book_id',
                  'class_id',
                  'section_id',
                  'type',
-                 'due_date'
+                 'end_date'
                 ];
 
     public function book()
@@ -42,9 +43,9 @@ class TeacherAssignment extends Model
     {
         return $this->belongsTo(Section::class);
     }
-    public function assignmentQuestions()
+      public function assignmentQuestions()
     {
-        return $this->hasMany(AssignmentQuestion::class);
+        return $this->hasMany(AssignmentQuestion::class,  'assignment_id'  );
     }
 
 }
