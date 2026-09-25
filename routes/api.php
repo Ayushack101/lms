@@ -62,6 +62,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(TeacherAssessmentController::class)->group(function () {
         Route::get('teacher/assigned-tests/subjects/{teacher_id}', 'subjects');
         Route::get('teacher/assigned-tests/books/{subject_id}/{teacher_id}', 'books');
+        Route::get('teacher/assigned-tests/books/{book_id}', 'class');
         Route::get('teacher/assigned-tests/tests/{book_id}', 'tests');
         // assign assessment routes
         Route::post('teacher/assigned-tests/create', "AssignAssessment");

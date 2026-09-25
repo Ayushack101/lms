@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Book;
+use App\Models\Classes;
 use App\Models\Teacher;
 use App\Models\TestTemplate;
 use App\Models\TestAssessment;
@@ -12,9 +13,15 @@ class TeacherAssessmentService
     public function getBooksByTeacher(int $subjectId, int $teacher_id)
     {
         $teacher = Teacher::where('id', $teacher_id)->first();
-        $books = $teacher->books()->where('subject_id', $subjectId)->with('class')->orderBy('id', 'asc')->get()->pluck('class');
+        $books = $teacher->books()->where('subject_id', $subjectId)->with('class')->orderBy('id', 'asc')->get();
 
         return $books;
+    }
+
+    public function getClassByBookId(int $bookId){
+        $class = book::where('id', $bookId)->first()->class()->pluck('class')->toArray();
+
+        return $class;
     }
 
     public function getTestsByBook(int $book_id)

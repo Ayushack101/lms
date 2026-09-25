@@ -22,6 +22,11 @@ class TeacherAssessmentController extends Controller
         return $this->teacherAssessmentService->getBooksByTeacher($subjectId, $teacherId);
     }
 
+    public function class($bookId)
+    {
+        return $this->teacherAssessmentService->getClassByBookId($bookId);
+    }
+
     public function tests( $bookId)
     {
         return $this->teacherAssessmentService->getTestsByBook($bookId);
