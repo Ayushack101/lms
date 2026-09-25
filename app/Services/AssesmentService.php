@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AssesmentService
 {
-     
+
      public function index()
     {
          $boards = Board::all();
@@ -89,7 +89,4 @@ class AssesmentService
 
         return redirect()->back()->with('success', 'Test deleted successfully!');
     }
-     
-    
-    
 }

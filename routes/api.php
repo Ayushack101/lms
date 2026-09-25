@@ -12,6 +12,7 @@ use App\Http\Controllers\StudentAssessmentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TeacherCourseController;
 use App\Http\Controllers\StudentCourseController;
+use App\Http\Controllers\TeacherAssignmentController;
 use Illuminate\Support\Facades\Route;
 
 // Unauthorized routes
@@ -78,6 +79,13 @@ Route::middleware('auth:sanctum')->group(function () {
          Route::post('student/assigned-tests/attempt/{assessmentId}/{studentId}', 'attemptAssessment');
          Route::get('student/assigned-tests/answers/{attemptId}', 'getAnswerByAttemptId');
     });
+
+
+
+    // Teacher Assessment routes
+    Route::controller(TeacherAssignmentController::class)->group(function () {
+
+    })
 });
 
 
