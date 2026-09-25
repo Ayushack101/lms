@@ -18,7 +18,7 @@ class AssesmentService
      public function index()
     {
          $boards = Board::all();
-        $testTemplates = TestTemplate::with('book', 'questions')->get()->groupBy('book_id');
+        $testTemplates = TestTemplate::with('book', 'questions', 'class')->get()->groupBy('book_id');
         return [
             'boards' => $boards,
             'testTemplates' => $testTemplates,
@@ -89,4 +89,8 @@ class AssesmentService
 
         return redirect()->back()->with('success', 'Test deleted successfully!');
     }
+<<<<<<< HEAD
+=======
+     
+>>>>>>> e88830dedcaf7a4af67a53465706b829da2a1a29
 }

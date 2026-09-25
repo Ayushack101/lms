@@ -23,10 +23,10 @@ class StudentResource extends JsonResource
             'school_name' => $this->school_name,
             'status' => $this->status,
             'teacher_code' => $this->teacher_code,
-            'user_id' => $this->whenLoaded('user'),
-            'class_id' => $this->whenLoaded('class'),
-            'section_id' => $this->whenLoaded('section'),
-            'teacher_id' => $this->whenLoaded('teacher'),
+            'user' => $this->whenLoaded('user'),
+            'class' => $this->whenLoaded('class'),
+            'section' => $this->whenLoaded('section'),
+            'teacher' => $this->whenLoaded('teacher'),
         ];
     }   
 }

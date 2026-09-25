@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('questions', function (Blueprint $table) {
-             $table->id();
+            $table->id();
 
             $table->text('question');
 
@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('d')->nullable();
 
             $table->string('answer')->nullable();
-
             $table->integer('marks')->default(1);
 
             $table->foreignId('test_template_id')

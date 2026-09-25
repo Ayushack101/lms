@@ -134,13 +134,14 @@
                                 {{-- <button type="button" data-toggle="modal" data-target="#add-teacher-modal"
                                     class='btn btn-success'><i class="fas fa-plus"></i>
                                     Add Teacher</button> --}}
-                            </div>
+                            </div> 
                             <div class="card-body">
                                 <table id="teacher-table" class="table table-bordered table-hover table-auto">
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Book</th>
+                                            <th>Class</th>
                                             <th>Objective Tests</th>
                                             <th>Subjective Tests</th>
                                         </tr>
@@ -149,12 +150,14 @@
                                         @foreach ($testTemplates as $bookId => $tests)
                                             @php
     $book = $tests->first()->book;
+    $class = $tests->first()->class;
     $objectiveTests = $tests->where('type', 'objective');
     $subjectiveTests = $tests->where('type', 'subjective');
                                             @endphp
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $book->book_name }}</td>
+                                                <td>{{ $class->class_name }}</td>
 
                                                 {{-- Objective Column --}}      
                                                 <td>
@@ -352,6 +355,7 @@
                     $('#questions-container').html(html);
                 });
             });
+
             $(document).on('click', '.delete-btn', function () {
 
                 let id = $(this).data('id');

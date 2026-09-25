@@ -15,19 +15,19 @@ use App\Services\TeacherService;
 class AssesmentController extends Controller
 {
  
-      public function __construct(private AssesmentService $assesmentService, private TeacherService $teacherService, private BoardService $boardService, private SubjectService $subjectService, private BookService $bookService, private ClassesService $classesService)
+    public function __construct(private AssesmentService $assesmentService, private TeacherService $teacherService, private BoardService $boardService, private SubjectService $subjectService, private BookService $bookService, private ClassesService $classesService)
     {
-        
     }
+
     public function index()
     {
-         $data = $this->assesmentService->index();
+        $data = $this->assesmentService->index();
 
-     return view('Pages.admin.Assesments.index', [
-        'boards' => $data['boards'],
-        'testTemplates' => $data['testTemplates'],
-    ]);
-     }
+        return view('Pages.admin.Assesments.index', [
+            'boards' => $data['boards'],
+            'testTemplates' => $data['testTemplates'],
+        ]);
+    }
 
     public function getsubjects(int $board_id)
     {
@@ -35,27 +35,23 @@ class AssesmentController extends Controller
         return response()->json($subjects);
     }
 
-
     public function getBooks(int $subject_id)
     {
         $books = $this->bookService->getBooksBySubject($subject_id);
-        return response()->json($books);
+        return response()->json($books); 
     }
 
     public function upload(UploadTestQuestionsRequest $request){
-     
         return  $this->assesmentService->upload($request);
-        
     }
+
     public function deleteTest($id)
     {
         return $this->assesmentService->deleteTest($id);
     }
+
     public function getQuestions($id)
     {
         return $this->assesmentService->getQuestions($id);
     }
-
-    
-   
 }

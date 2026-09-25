@@ -71,7 +71,12 @@ class StudentService
 
     public function find(int $id): Student
     {
-        return Student::findOrFail($id);
+        return Student::findOrFail($id)->load([
+            'user', 
+            'section',
+            'teacher',
+            'class'
+        ]);
     }
 
     public function update(int $id, array $data): Student
