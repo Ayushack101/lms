@@ -31,7 +31,7 @@ class TeacherAssessmentService
         return $tests;
     }
 
-     //  Crud operations for teacher assessment
+    //  Crud operations for teacher assessment
      public function teacherAssignAssessment($data)
      {
          $assessment = TestAssessment::create($data);
@@ -40,7 +40,7 @@ class TeacherAssessmentService
 
      public function getAssessmentByTeacher($teacher_id)
      {
-         $assessments = TestAssessment::where('teacher_id', $teacher_id)->get();
+         $assessments = TestAssessment::where('teacher_id', $teacher_id)->with('testTemplate.question')->get();
          return $assessments;
      }
 

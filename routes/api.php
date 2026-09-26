@@ -79,6 +79,3 @@ Route::middleware('auth:sanctum')->group(function () {
          Route::get('student/assigned-tests/answers/{attemptId}', 'getAnswerByAttemptId');
     });
 });
-
-
-
