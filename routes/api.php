@@ -81,7 +81,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-
     // Teacher Assessment routes
     Route::controller(TeacherAssignmentController::class)->group(function () {
      Route::get('teacher/assignments/subjects/{teacher_id}', 'subjects');

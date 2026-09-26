@@ -40,8 +40,10 @@ class TeacherAssessmentService
 
      public function getAssessmentByTeacher($teacher_id)
      {
-         $assessments = TestAssessment::where('teacher_id', $teacher_id)->get();
-         return $assessments;
+        // $assessments = TestAssessment::where('teacher_id', $teacher_id)->with('testTemplate')->get();
+        $assessments = TestAssessment::where('teacher_id', $teacher_id)->with('testTemplate.questions')->get();
+
+        return $assessments;
      }
 
      public function editAssessment($id, $data)
