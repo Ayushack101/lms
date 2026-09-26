@@ -13,6 +13,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TeacherCourseController;
 use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\TeacherAssignmentController;
+use App\Http\Controllers\StudentAssignmentController;
 use Illuminate\Support\Facades\Route;
 
 // Unauthorized routes
@@ -92,6 +93,16 @@ Route::middleware('auth:sanctum')->group(function () {
      Route::post('teacher/assignments/create', "assignAssignment");
      Route::post('teacher/assignments/assigned/edit/{assignment_id}', 'editAssignedAssignment');
      Route::get('teacher/assignments/assigned/delete/{assignment_id}', 'deleteAssignment');
+
+     Route::get('teacher/assignments/studentanswers/{assignment_id}', 'getSubmittedAssignments');
+     Route::post('teacher/assignments/answers/{attemptId}/{studentId}', 'storeTeacherfeedback');
+    });
+
+    // Student Assignment routes
+    Route::controller(StudentAssignmentController::class)->group(function () {
+        Route::get('student/assignments/all-assigned/{teacherId}/{bookId}/{sectionId}', 'getAssignedAssignment');
+        Route::get('student/assignments/questions/{assignmentId}', 'getquestions');
+        Route::post('student/assignments/attempt/{assignmentId}/{studentId}', 'attemptAssignment');
     });
 
 });

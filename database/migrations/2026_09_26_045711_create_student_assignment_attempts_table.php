@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('assignment_id')->constrained('teacher_assignments')->cascadeOnDelete()->cascadeOnUpdate();
             $table->enum('status', ['pending', 'submitted'])->default('pending');
             $table->timestamps();
-        }); 
+        });
     }
 
     /**

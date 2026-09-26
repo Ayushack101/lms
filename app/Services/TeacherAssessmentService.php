@@ -27,7 +27,7 @@ class TeacherAssessmentService
     public function getTestsByBook(int $book_id)
     {
         $book_id = Book::where('id', $book_id)->first();
-        $tests = TestTemplate::where('book_id', $book_id->id)->get();
+        $tests = TestTemplate::where('book_id', $book_id->id)->with('questions')->get();
         return $tests;
     }
 
@@ -40,9 +40,7 @@ class TeacherAssessmentService
 
      public function getAssessmentByTeacher($teacher_id)
      {
-        // $assessments = TestAssessment::where('teacher_id', $teacher_id)->with('testTemplate')->get();
-        $assessments = TestAssessment::where('teacher_id', $teacher_id)->with('testTemplate.questions')->get();
-
+        $assessments = TestAssessment::where('teacher_id', $teacher_id)->with('testTemplate.questions', 'class', 'book')->get();
         return $assessments;
      }
 

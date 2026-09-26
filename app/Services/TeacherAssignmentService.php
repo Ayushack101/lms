@@ -9,6 +9,8 @@ use App\Models\TestTemplate;
 use App\Models\TestAssessment;
 use App\Models\AssignmentQuestion;
 use App\Models\TeacherAssignment;
+use App\Models\StudentAssignmentAttempt;
+use App\Models\StudentAssignmentAnswer;
 
 use Illuminate\Support\Facades\DB;
 class TeacherAssignmentService
@@ -121,6 +123,29 @@ class TeacherAssignmentService
         return $assignment;
     }
 
+    public function getSubmittedAssignments(int $assignmentId)
+    {
+        $attempts = StudentAssignmentAttempt::where('id', $assignmentId)->where('status', 'submitted')->get();
+
+        foreach ($attempts as $attempt) {
+            $attempt->answers = StudentAssignmentAnswer::where('student_assignment_attempt_id', $attempt->id)->with('question')->get();
+        }
+        return $attempts;
+    }
+
+ public function storeTeacherfeedback(int $attempt_id, int $student_id, array $data)
+{
+    $attempt = StudentAssignmentAttempt::where([ 'id' => $attempt_id, 'student_id' => $student_id, 'status' => 'submitted' ])->first();
+
+    $attempt->answers = StudentAssignmentAnswer::where( 'student_assignment_attempt_id', $attempt_id )->with('question')->get();
+
+     $storeFeedback = TeacherAssignmentFeedback::create([
+         'attempt_id' => $attempt_id,
+         'student_id' => $student_id,
+         'feedback' => request('feedback')
+     ])
+     return $storeFeedback;
+}
 
 
 }

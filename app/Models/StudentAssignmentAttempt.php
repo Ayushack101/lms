@@ -11,7 +11,7 @@ class StudentAssignmentAttempt extends Model
     protected $fillable = [
         'student_id',
         'assignment_id',
-        'status'
+        'status',
     ];
 
       public function student()
