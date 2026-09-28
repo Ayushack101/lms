@@ -2,9 +2,9 @@
 
 namespace App\Services;
 use App\Models\TestTemplate;
-use App\Models\TestAssessment;
-use App\Models\StudentTestAttempt;
-use App\Models\StudentAnswer;
+use App\Models\TeacherAssessment;
+use App\Models\StudentAssessmentAttempt;
+use App\Models\StudentAssessmentAnswer;
 use Illuminate\Support\Facades\DB;
 
 class StudentAssessmentService
@@ -12,13 +12,13 @@ class StudentAssessmentService
 
     public function getStudentAssessment($TeacherId, $bookId, $sectionId)
     {
-         $getStudentAssessment = TestAssessment::where('teacher_id', $TeacherId)->where('book_id', $bookId)
-            ->where('section_id', $sectionId)->get();
-         return $getStudentAssessment;
+         $getStudentAssessment = TeacherAssessment::where('teacher_id', $TeacherId)->where('book_id', $bookId)->where('section_id', $sectionId)->where('status', 'active')->with('studentAssessmentAttempts')->get();
+
+        return $getStudentAssessment;
     }
     public function getquestionsByAssessmentId($assessmentId)
 {
-    $assessment = TestAssessment::where('id', $assessmentId)->first();
+    $assessment = TeacherAssessment::where('id', $assessmentId)->first();
     $template = TestTemplate::where('id', $assessment->test_template_id)->first();
     return $template->questions()->get();
 
@@ -32,7 +32,7 @@ class StudentAssessmentService
 
     public function attemptAssessment($assessmentId, $studentId, $answers)
     {
-            $assessment = TestAssessment::where('id', $assessmentId)->first();
+            $assessment = TeacherAssessment::where('id', $assessmentId)->first();
             $template = TestTemplate::where('id', $assessment->test_template_id)->first();
             $questions = $template->questions()->get();
 
@@ -51,12 +51,13 @@ class StudentAssessmentService
 
             $totalMarks = $questions->sum('marks');
 
-
-            $attempt = StudentTestAttempt::create([
+            $attempt = StudentAssessmentAttempt::create([
                 'student_id' => $studentId,
                 'test_template_id' => $template->id,
                 'total_marks' => $totalMarks,
                 'obtained_marks' => 0,
+                'assessment_id' => $assessment->id,
+                'is_submitted' => 'submitted'
             ]);
 
             $obtainedMarks = 0;
@@ -69,7 +70,7 @@ class StudentAssessmentService
 
                 $obtainedMarks += $marks;
 
-                StudentAnswer::create([
+                StudentAssessmentAnswer::create([
                     'attempt_id' => $attempt->id,
                     'question_id' => $question->id,
                     'answer' => $answer['answer'],
@@ -92,7 +93,7 @@ class StudentAssessmentService
 
     public function getAnswerByAttemptId($attemptId)
     {
-    $answers = StudentAnswer::where('attempt_id', $attemptId)->get();
+    $answers = StudentAssessmentAnswer::where('attempt_id', $attemptId)->get();
     return $answers;
     }
 }

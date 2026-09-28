@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StudentTestAttempt extends Model
+class StudentAssessmentAttempt extends Model
 {
     //
-     protected $fillable = ['student_id', 'test_template_id', 'total_marks', 'obtained_marks'];
+     protected $fillable = ['student_id', 'assessment_id', 'test_template_id', 'total_marks', 'obtained_marks', 'is_submitted'];
 
     public function student()
     {
@@ -22,5 +22,9 @@ class StudentTestAttempt extends Model
     public function testTemplate()
     {
         return $this->belongsTo(TestTemplate::class);
+    }
+    public function assessment()
+    {
+        return $this->belongsTo(TeacherAssessment::class);
     }
 }

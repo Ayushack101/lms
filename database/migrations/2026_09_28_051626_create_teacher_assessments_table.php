@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('test_assessments', function (Blueprint $table) {
-            $table->id();
+        Schema::create('teacher_assessments', function (Blueprint $table) {
+           $table->id();
             $table->date('start_date');
             $table->date('end_date');
             $table->enum('status', ['active', 'pending'])->default('active');
@@ -24,11 +24,12 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('test_assessments');
+        Schema::dropIfExists('teacher_assessments');
     }
 };

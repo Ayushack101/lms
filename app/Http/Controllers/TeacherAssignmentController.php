@@ -48,8 +48,8 @@ class TeacherAssignmentController extends Controller
     public function getSubmittedAssignments($assignmentId){
         return $this->teacherAssignmentService->getSubmittedAssignments($assignmentId);
     }
-    public function storeTeacherfeedback( int $atttempt_id, int $student_id, array $data){
-        return $this->teacherAssignmentService->storeTeacherfeedback( $atttempt_id, $student_id, $data);
+    public function storeTeacherfeedback( int $atttempt_id, int $student_id, Request $request){
+        return $this->teacherAssignmentService->storeTeacherfeedback($atttempt_id, $student_id, $request->all());
     }
 
 

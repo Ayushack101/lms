@@ -73,7 +73,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('teacher/assigned-tests/assigned/delete/{id}', 'deleteAssignedAssessment');
     });
 
-    // Student Assessment routes
+    // // Student Assessment routes
     Route::controller(StudentAssessmentController::class)->group(function () {
          Route::get('student/assigned-tests/all-assigned/{teacherId}/{bookId}/{sectionId}', 'index');
          Route::get('student/assigned-tests/question/{assessmentId}', 'getquestions');
@@ -82,28 +82,28 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-    // Teacher Assessment routes
-    Route::controller(TeacherAssignmentController::class)->group(function () {
-     Route::get('teacher/assignments/subjects/{teacher_id}', 'subjects');
-     Route::get('teacher/assignments/books/{teacher_id}/{subject_id}', 'books');
-     Route::get('teacher/assignments/classes/{book_id}', 'class');
+    // // Teacher Assessment routes
+    // Route::controller(TeacherAssignmentController::class)->group(function () {
+    //  Route::get('teacher/assignments/subjects/{teacher_id}', 'subjects');
+    //  Route::get('teacher/assignments/books/{teacher_id}/{subject_id}', 'books');
+    //  Route::get('teacher/assignments/classes/{book_id}', 'class');
 
-     Route::get('teacher/assignments/all-assigned/{teacher_id}', 'getAssignedAssessments');
-     Route::get('teacher/assignments/questions/{assignment_id}', 'getAssignedQuestion');
-     Route::post('teacher/assignments/create', "assignAssignment");
-     Route::post('teacher/assignments/assigned/edit/{assignment_id}', 'editAssignedAssignment');
-     Route::get('teacher/assignments/assigned/delete/{assignment_id}', 'deleteAssignment');
+    //  Route::get('teacher/assignments/all-assigned/{teacher_id}', 'getAssignedAssessments');
+    //  Route::get('teacher/assignments/questions/{assignment_id}', 'getAssignedQuestion');
+    //  Route::post('teacher/assignments/create', "assignAssignment");
+    //  Route::post('teacher/assignments/assigned/edit/{assignment_id}', 'editAssignedAssignment');
+    //  Route::get('teacher/assignments/assigned/delete/{assignment_id}', 'deleteAssignment');
 
-     Route::get('teacher/assignments/studentanswers/{assignment_id}', 'getSubmittedAssignments');
-     Route::post('teacher/assignments/answers/{attemptId}/{studentId}', 'storeTeacherfeedback');
-    });
+    //  Route::get('teacher/assignments/studentanswers/{assignment_id}', 'getSubmittedAssignments');
+    //  Route::post('teacher/assignments/answers/{attemptId}/{studentId}', 'storeTeacherfeedback');
+    // });
 
-    // Student Assignment routes
-    Route::controller(StudentAssignmentController::class)->group(function () {
-        Route::get('student/assignments/all-assigned/{teacherId}/{bookId}/{sectionId}', 'getAssignedAssignment');
-        Route::get('student/assignments/questions/{assignmentId}', 'getquestions');
-        Route::post('student/assignments/attempt/{assignmentId}/{studentId}', 'attemptAssignment');
-    });
+    // // Student Assignment routes
+    // Route::controller(StudentAssignmentController::class)->group(function () {
+    //     Route::get('student/assignments/all-assigned/{teacherId}/{bookId}/{sectionId}', 'getAssignedAssignment');
+    //     Route::get('student/assignments/questions/{assignmentId}', 'getquestions');
+    //     Route::post('student/assignments/attempt/{assignmentId}/{studentId}', 'attemptAssignment');
+    // });
 
 });
 
