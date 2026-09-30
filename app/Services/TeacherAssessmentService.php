@@ -64,14 +64,26 @@ class TeacherAssessmentService
          return $assessment;
      }
 
-     public function getSubmitedWork(int $teacherId)
+    public function getSubmitedWork(int $teacherId, $bookId, $sectionId)
     {
-        $assessment = TeacherAssessment::find($teacherId);
-
-        $assessment->studentAssessmentAttempts = $assessment->studentAssessmentAttempts()->where('is_submitted', 'submitted')->with('answers.question')->get();
+        $assessment = TeacherAssessment::where('teacher_id', $teacherId)->where('book_id', $bookId)->where('section_id', $sectionId)
+            ->with([
+                'testTemplate.book',
+                'studentAssessmentAttempts' => function ($query) {
+                    $query->where('is_submitted', 'submitted')
+                        ->with('answers.question', 'student');
+                }
+            ])
+            ->get();
 
         return $assessment;
     }
+
+    public function getteacherClassByTeacher(int $teacher_id){
+        $class = Teacher::where('id', $teacher_id)->first()->classes()->get();
+        return $class;
+    }
+
 
 
 

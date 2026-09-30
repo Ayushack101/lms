@@ -95,7 +95,7 @@ class StudentAssessmentService
 
     public function getAnswerByAttemptId($attemptId)
     {
-    $answers = StudentAssessmentAnswer::where(['attempt_id', $attemptId])->with('question')->get();
+    $answers = StudentAssessmentAnswer::where('attempt_id', $attemptId)->with('question')->get();
     return $answers;
     }
 }
