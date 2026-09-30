@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('assessment_id')->constrained('teacher_assessments')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('test_template_id')->constrained('test_templates')->cascadeOnUpdate()->cascadeOnDelete();
             $table->enum('is_submitted', ['pending', 'submitted'])->default('pending');
+            $table->enum('is_teacher_checked',['pending','checked'])->default('pending');
             $table->timestamps();
         });
     }

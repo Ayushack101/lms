@@ -13,9 +13,9 @@ public function __construct(private StudentAssessmentService $studentAssessmentS
 }
 
 
-public function index($teacherId, $bookId, $sectionId)
+public function index($teacherId, $classId, $sectionId)
 {
-    $assessments = $this->studentAssessmentService->getStudentAssessment($teacherId, $bookId, $sectionId);
+    $assessments = $this->studentAssessmentService->getStudentAssessment($teacherId, $classId, $sectionId);
     return $assessments;
 }
 public function  getquestions($assessmentId){
@@ -32,5 +32,6 @@ public function getAnswerByAttemptId($attemptId)
     $answers = $this->studentAssessmentService->getAnswerByAttemptId($attemptId);
     return $answers;
 }
-}
 
+
+}

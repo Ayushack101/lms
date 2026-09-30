@@ -13,8 +13,8 @@ class StudentAssignmentController extends Controller
     {
     }
 
-    public function getAssignedAssignment($teacherId, $bookId, $sectionId){
-        $assignment = $this->studentAssignmentService->getAssignedAssigment($teacherId, $bookId, $sectionId);
+    public function getAssignedAssignment($teacherId, $classId, $sectionId){
+        $assignment = $this->studentAssignmentService->getAssignedAssigment($teacherId, $classId, $sectionId);
         return $assignment;
     }
     public function getquestions($assignmentId){

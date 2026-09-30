@@ -6,6 +6,8 @@ use App\Services\TeacherAssessmentService;
 use App\Services\TeacherCourseService;
 use App\Http\Requests\TeacherAssessments\storeRequest;
 use App\Http\Requests\TeacherAssessments\updateRequest;
+use Illuminate\Http\Request;
+
 
 class TeacherAssessmentController extends Controller
 {
@@ -50,5 +52,10 @@ class TeacherAssessmentController extends Controller
     public function deleteAssignedAssessment($assessmentId)
     {
         return $this->teacherAssessmentService->deleteAssessment($assessmentId);
+    }
+    public function editSubmittedWork($assessmentId, $studentId, Request $request)
+    {
+        return $this->teacherAssessmentService->editSubmittedWork($assessmentId, $studentId, $request->all());
+
     }
 }

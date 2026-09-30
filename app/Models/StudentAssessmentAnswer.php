@@ -15,14 +15,16 @@ class StudentAssessmentAnswer extends Model
         'marks_obtained'
     ];
 
+
+
     public function attempt()
     {
-        return $this->belongsTo(StudentTestAttempt::class);
+        return $this->belongsTo(StudentAssessmentAttempt::class, 'attempt_id' );
     }
 
     public function question()
     {
         return $this->belongsTo(Question::class);
     }
-    
+
 }
