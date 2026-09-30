@@ -64,11 +64,21 @@ class TeacherAssessmentService
          return $assessment;
      }
 
+     public function getSubmitedWork(int $teacherId)
+    {
+        $assessment = TeacherAssessment::find($teacherId);
+
+        $assessment->studentAssessmentAttempts = $assessment->studentAssessmentAttempts()->where('is_submitted', 'submitted')->with('answers.question')->get();
+
+        return $assessment;
+    }
+
+
+
      //  ** submitted work
     public function editSubmittedWork( int $assessmentId,  int $studentId, array $data)
     {
         $attempt = StudentAssessmentAttempt::where('assessment_id', $assessmentId)->where('student_id', $studentId)->first();
-
         if (!$attempt) {
             return response()->json([
                 'message' => 'Assessment attempt not found'
@@ -104,7 +114,7 @@ class TeacherAssessmentService
         }
 
         $attempt->update([
-            'obtained_marks' => $obtainedMarks
+            'obtained_marks' => $obtainedMarks,
             'is_teacher_checked'=> "checked"
         ]);
 

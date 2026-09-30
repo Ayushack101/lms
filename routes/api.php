@@ -73,7 +73,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('teacher/assigned-tests/assigned/delete/{id}', 'deleteAssignedAssessment');
 
         // Sumbited work
-        Route::post('teacher/assigned-tests/answers/{assessmentId}/{studentId}', 'editSubmittedWork');
+        Route::get('teacher/assigned-tests/submittedassessment/{teacehrId}', 'getSubmittedWork');
+        Route::post('teacher/assigned-tests/updateassessment /{assessmentId}/{studentId}', 'editSubmittedWork');
     });
 
     // // Student Assessment routes
@@ -83,7 +84,7 @@ Route::middleware('auth:sanctum')->group(function () {
          Route::post('student/assigned-tests/attempt/{assessmentId}/{studentId}', 'attemptAssessment');
 
 
-         //Submitted work 
+         //Submitted work
          Route::get('student/assigned-tests/answers/{attemptId}', 'getAnswerByAttemptId');
 
 
