@@ -6,7 +6,7 @@ use App\Models\Book;
 use App\Models\Classes;
 use App\Models\Teacher;
 use App\Models\TestTemplate;
-use App\Models\TestAssessment;
+use App\Models\TeacherAssessment;
 
 class TeacherAssessmentService
 {
@@ -20,7 +20,6 @@ class TeacherAssessmentService
 
     public function getClassByBookId(int $bookId){
         $class = book::where('id', $bookId)->first()->class()->pluck('class')->toArray();
-
         return $class;
     }
 
@@ -33,25 +32,33 @@ class TeacherAssessmentService
 
     //  Crud operations for teacher assessment
      public function teacherAssignAssessment($data)
-     {
-         $assessment = TestAssessment::create($data);
-         return $assessment;
-     }
+{
+    $assessment = TeacherAssessment::where(['test_template_id' => $data['test_template_id'],'section_id' => $data['section_id'],
+    ])->first();
+
+    if ($assessment) {
+        return response()->json([
+            'message' => 'This test is already assigned to this section.'
+        ], 422);
+    }
+
+    return TeacherAssessment::create($data);
+}
 
      public function getAssessmentByTeacher($teacher_id)
      {
-        $assessments = TestAssessment::where('teacher_id', $teacher_id)->with('testTemplate.questions', 'class', 'book')->get();
+        $assessments = TeacherAssessment::where('teacher_id', $teacher_id)->with('testTemplate.questions', 'class', 'book')->get();
         return $assessments;
      }
 
      public function editAssessment($id, $data)
      {
-         $assessment = TestAssessment::where('id', $id)->update($data);
+         $assessment = TeacherAssessment::where('id', $id)->update($data);
          return $assessment;
      }
      public function deleteAssessment($id)
      {
-         $assessment = TestAssessment::where('id', $id)->delete();
+         $assessment = TeacherAssessment::where('id', $id)->delete();
          return $assessment;
      }
 }

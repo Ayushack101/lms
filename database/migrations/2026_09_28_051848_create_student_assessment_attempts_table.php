@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('student_test_attempts', function (Blueprint $table) {
+        Schema::create('student_assessment_attempts', function (Blueprint $table) {
             $table->id();
             $table->integer('total_marks')->nullable();
             $table->integer('obtained_marks')->nullable();
             $table->foreignId('student_id')->constrained('students')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('assessment_id')->constrained('teacher_assessments')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('test_template_id')->constrained('test_templates')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->enum('is_submitted', ['pending', 'submitted'])->default('pending');
+            $table->enum('is_teacher_checked',['pending','checked'])->default('pending');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('student_test_attempts');
+        Schema::dropIfExists('student_assessment_attempts');
     }
 };

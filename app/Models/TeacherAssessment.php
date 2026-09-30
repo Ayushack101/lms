@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TestAssessment extends Model
+class TeacherAssessment extends Model
 {
+    //
+
     protected $fillable = [
         'teacher_id',
         'test_template_id',
@@ -37,4 +39,11 @@ class TestAssessment extends Model
     {
         return $this->belongsTo(Book::class);
     }
+    public function studentAssessmentAttempts()
+    {
+        return $this->hasMany(StudentAssessmentAttempt::class, 'assessment_id');
+    }
+
 }
+
+

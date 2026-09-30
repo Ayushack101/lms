@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StudentAnswer extends Model
+class StudentAssessmentAnswer extends Model
 {
     //
-     protected $fillable = [
+        protected $fillable = [
         'attempt_id',
         'question_id',
         'answer',
@@ -24,4 +24,5 @@ class StudentAnswer extends Model
     {
         return $this->belongsTo(Question::class);
     }
+    
 }

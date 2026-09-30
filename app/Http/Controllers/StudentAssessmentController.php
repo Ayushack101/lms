@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\StudentAssessmentService;
+use App\Http\Requests\StudentAssessments\StoreAssessmentRequest;
 
 class StudentAssessmentController extends Controller
 {
@@ -12,16 +13,16 @@ public function __construct(private StudentAssessmentService $studentAssessmentS
 }
 
 
-public function index($teacherId, $bookId, $sectionId)
+public function index($teacherId, $classId, $sectionId)
 {
-    $assessments = $this->studentAssessmentService->getStudentAssessment($teacherId, $bookId, $sectionId);
+    $assessments = $this->studentAssessmentService->getStudentAssessment($teacherId, $classId, $sectionId);
     return $assessments;
 }
 public function  getquestions($assessmentId){
     $questions = $this->studentAssessmentService->getquestionsByAssessmentId($assessmentId);
     return $questions;
 }
-public function attemptAssessment( $assessmentId, $studentId, Request $request)
+public function attemptAssessment($assessmentId, $studentId, StoreAssessmentRequest $request)
 {
     // $answers = $request->input('answers');
     return $this->studentAssessmentService->attemptAssessment($assessmentId, $studentId, $request->answers);
