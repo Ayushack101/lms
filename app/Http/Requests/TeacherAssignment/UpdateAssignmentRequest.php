@@ -25,12 +25,10 @@ class UpdateAssignmentRequest extends FormRequest
         return [
 
             'teacher_id' => 'required|exists:teachers,id',
-            'subject_id' => 'required|exists:subjects,id',
             'book_id' => 'required|exists:books,id',
             'class_id' => 'required|exists:classes,id',
             'section_id' => 'required|exists:sections,id',
             'assignment_name' => 'required|string|max:255',
-            'type' => 'required|string|max:100',
             'end_date' => 'required|date',
 
             // Questions

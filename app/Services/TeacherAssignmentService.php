@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\DB;
 class TeacherAssignmentService
 {
 
-       public function getBooksByTeacher(int $teacher_id, int $subjectId )
+    public function getBooksByTeacher(int $teacher_id, int $subjectId)
     {
-        $teacher = Teacher::where('id', $teacher_id)->first();
-        $books = $teacher->books()->where('subject_id', $subjectId)->with('class')->orderBy('id', 'asc')->get();
+        $teacher = Teacher::find($teacher_id);
+        $books = $teacher->books()->where('subject_id', $subjectId)->orderBy('id', 'asc')->with('class')->get();
         return $books;
     }
 
@@ -44,12 +44,10 @@ class TeacherAssignmentService
             DB::beginTransaction();
             $assignment = TeacherAssignment::create([
                 'teacher_id' => $data['teacher_id'],
-                'subject_id' => $data['subject_id'],
                 'book_id' => $data['book_id'],
                 'class_id' => $data['class_id'],
                 'section_id' => $data['section_id'],
                 'assignment_name' => $data['assignment_name'],
-                'type' => $data['type'],
                 'end_date' => $data['end_date'],
             ]);
 
@@ -89,12 +87,10 @@ class TeacherAssignmentService
 
         $assignment->update([
             'teacher_id' => $data['teacher_id'],
-            'subject_id' => $data['subject_id'],
             'book_id' => $data['book_id'],
             'class_id' => $data['class_id'],
             'section_id' => $data['section_id'],
             'assignment_name' => $data['assignment_name'],
-            'type' => $data['type'],
             'end_date' => $data['end_date'],
         ]);
         // $assignment->update($data);
@@ -154,13 +150,11 @@ class TeacherAssignmentService
             ], 404);
         }
 
-
-
         foreach ($data['feedback'] as $item) {
             $attemptId = $item['attempt_id'];
             $feedback = $item['feedback'];
 
-            $attempt = StudentAssignmentAnswer::where(['id' => $answerId, 'attempt_id' => $attemptId])->first();
+            $attempt = StudentAssignmentAnswer::where(['attempt_id' => $attemptId])->first();
               if (!$attempt) {
             return response()->json([
                 'message' => 'Submitted attempt not found'
