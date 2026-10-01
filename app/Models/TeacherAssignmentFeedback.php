@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TeacherAssignmentFeedback extends Model
 {
     //
-    protected $table = 'teacher_assignment_feedbacks';
+    protected $table = 'teacher_assignment_feedback';
     protected $fillable = [
         'attempt_id',
         'question_id',

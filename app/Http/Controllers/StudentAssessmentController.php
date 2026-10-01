@@ -32,5 +32,6 @@ public function getAnswerByAttemptId($attemptId)
     $answers = $this->studentAssessmentService->getAnswerByAttemptId($attemptId);
     return $answers;
 }
-}
 
+
+}

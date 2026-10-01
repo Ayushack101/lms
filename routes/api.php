@@ -71,6 +71,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('teacher/assigned-tests/all-assigned/{teacher_id}', 'getAssignedAssessments');
         Route::post('teacher/assigned-tests/assigned/edit/{id}', 'editAssignedAssessment');
         Route::get('teacher/assigned-tests/assigned/delete/{id}', 'deleteAssignedAssessment');
+
+        // Sumbited work
+        Route::get('teacher/assigned-tests/submittedassessment/{teacehrId}/{bookId}/{sectionId}', 'getSubmittedWork');
+        Route::get('teacher/assessment/class/{teacherid}', 'teacherClass');
+        Route::post('teacher/assigned-tests/updateassessment/{assessmentId}/{studentId}', 'editSubmittedWork');
     });
 
     // // Student Assessment routes
@@ -78,30 +83,40 @@ Route::middleware('auth:sanctum')->group(function () {
          Route::get('student/assigned-tests/all-assigned/{teacherId}/{classId}/{sectionId}', 'index');
          Route::get('student/assigned-tests/question/{assessmentId}', 'getquestions');
          Route::post('student/assigned-tests/attempt/{assessmentId}/{studentId}', 'attemptAssessment');
+
+
+         //Submitted work
          Route::get('student/assigned-tests/answers/{attemptId}', 'getAnswerByAttemptId');
+
+
     });
-    
+
     // // Teacher Assessment routes
-    // Route::controller(TeacherAssignmentController::class)->group(function () {
-    //  Route::get('teacher/assignments/subjects/{teacher_id}', 'subjects');
-    //  Route::get('teacher/assignments/books/{teacher_id}/{subject_id}', 'books');
-    //  Route::get('teacher/assignments/classes/{book_id}', 'class');
+    Route::controller(TeacherAssignmentController::class)->group(function () {
+     Route::get('teacher/assignments/subjects/{teacher_id}', 'subjects');
+     Route::get('teacher/assignments/books/{teacher_id}/{subject_id}', 'books');
+     Route::get('teacher/assignments/classes/{book_id}', 'class');
 
-    //  Route::get('teacher/assignments/all-assigned/{teacher_id}', 'getAssignedAssessments');
-    //  Route::get('teacher/assignments/questions/{assignment_id}', 'getAssignedQuestion');
-    //  Route::post('teacher/assignments/create', "assignAssignment");
-    //  Route::post('teacher/assignments/assigned/edit/{assignment_id}', 'editAssignedAssignment');
-    //  Route::get('teacher/assignments/assigned/delete/{assignment_id}', 'deleteAssignment');
+     Route::get('teacher/assignments/all-assigned/{teacher_id}', 'getAssignedAssessments');
+     Route::get('teacher/assignments/questions/{assignment_id}', 'getAssignedQuestion');
+     Route::post('teacher/assignments/create', "assignAssignment");
+     Route::post('teacher/assignments/assigned/edit/{assignment_id}', 'editAssignedAssignment');
+     Route::get('teacher/assignments/assigned/delete/{assignment_id}', 'deleteAssignment');
 
-    //  Route::get('teacher/assignments/studentanswers/{assignment_id}', 'getSubmittedAssignments');
-    //  Route::post('teacher/assignments/answers/{attemptId}/{studentId}', 'storeTeacherfeedback');
-    // });
+     Route::get('teacher/assignments/studentanswers/{assignment_id}', 'getSubmittedAssignments');
+     Route::post('teacher/assignments/feedback', 'storeTeacherfeedback');
+     Route::get('teacher/assignments/feedback/{assignment_id}', 'getFeedback');
+    });
 
     // // Student Assignment routes
-    // Route::controller(StudentAssignmentController::class)->group(function () {
-    //     Route::get('student/assignments/all-assigned/{teacherId}/{bookId}/{sectionId}', 'getAssignedAssignment');
-    //     Route::get('student/assignments/questions/{assignmentId}', 'getquestions');
-    //     Route::post('student/assignments/attempt/{assignmentId}/{studentId}', 'attemptAssignment');
-    // });
+    Route::controller(StudentAssignmentController::class)->group(function () {
+        Route::get('student/assignments/all-assigned/{teacherId}/{classId}/{sectionId}', 'getAssignedAssignment');
+        Route::get('student/assignments/questions/{assignmentId}', 'getquestions');
+        Route::post('student/assignments/attempt/{assignmentId}/{studentId}', 'attemptAssignment');
+
+
+        // Sumbited work
+
+    });
 
 });

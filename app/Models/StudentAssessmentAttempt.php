@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class StudentAssessmentAttempt extends Model
 {
     //
-     protected $fillable = ['student_id', 'assessment_id', 'test_template_id', 'total_marks', 'obtained_marks', 'is_submitted'];
+     protected $fillable = ['student_id', 'assessment_id', 'test_template_id', 'total_marks', 'obtained_marks', 'is_submitted', 'is_teacher_checked'];
 
     public function student()
     {
@@ -16,7 +16,7 @@ class StudentAssessmentAttempt extends Model
 
     public function answers()
     {
-        return $this->hasMany(StudentAnswer::class, 'attempt_id');
+        return $this->hasMany(StudentAssessmentAnswer::class, 'attempt_id');
     }
 
     public function testTemplate()
