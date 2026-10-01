@@ -11,7 +11,7 @@ use App\Models\AssignmentQuestion;
 use App\Models\TeacherAssignment;
 use App\Models\StudentAssignmentAttempt;
 use App\Models\StudentAssignmentAnswer;
-use App\Models\TeacherAssignmentFeedback;
+
 
 use Illuminate\Support\Facades\DB;
 class TeacherAssignmentService
@@ -66,7 +66,9 @@ class TeacherAssignmentService
             }
 
             DB::commit();
-            return $assignment->load('assignmentQuestions');
+            return response()->json([
+                'message' => 'Assignment created successfully',
+            ], 201);
 
         }
         catch (\Throwable $exception) {
@@ -115,7 +117,9 @@ class TeacherAssignmentService
             }
 
 
-        return $assignment->load('assignmentQuestions');
+        return response()->json([
+                'message' => 'Assignment updated successfully',
+            ], 200);
     }
 
     public function deleteAssignment(int $assignmentId)
@@ -124,38 +128,54 @@ class TeacherAssignmentService
         return $assignment;
     }
 
-    public function getSubmittedAssignments(int $assignmentId)
+
+    // Submitted Assignment
+
+    public function getSubmittedAssignments(int $teacherId, int $bookId, int $sectionId)
     {
-        $attempts = StudentAssignmentAttempt::where('id', $assignmentId)->where('status', 'submitted')->first();
-        $answers = StudentAssignmentAnswer::where('student_assignment_attempt_id', $attempts->id)->with('question')->get();
-        return $answers;
+        $assignments = TeacherAssignment::where(['teacher_id' => $teacherId, 'book_id' => $bookId, 'section_id' => $sectionId])
+            ->with([ 'book', 'attempts' => function ($query) {
+                    $query->where('status', 'submitted')->with('answers.question', 'student');
+                }])->get();
 
+        return $assignments;
     }
-public function storeTeacherFeedback(array $data)
-{
-    $attemptId = $data['attempt_id'];
-    $studentId = $data['student_id'];
 
-    $attempt = StudentAssignmentAttempt::where(['id' => $attemptId,'student_id' => $studentId, 'status' => 'submitted'])->first();
 
-    if (!$attempt) {
+    public function storeTeacherFeedback(array $data)
+    {
+        $attemptId = $data['attempt_id'];
+        $studentId = $data['student_id'];
+
+        $attempt = StudentAssignmentAttempt::where(['id' => $attemptId,'student_id' => $studentId, 'status' => 'submitted'])->first();
+        if (!$attempt) {
+            return response()->json([
+                'message' => 'Submitted attempt not found'
+            ], 404);
+        }
+
+
+
+        foreach ($data['feedback'] as $item) {
+            $attemptId = $item['attempt_id'];
+            $feedback = $item['feedback'];
+
+            $attempt = StudentAssignmentAnswer::where(['id' => $answerId, 'attempt_id' => $attemptId])->first();
+              if (!$attempt) {
+            return response()->json([
+                'message' => 'Submitted attempt not found'
+            ], 404);
+        }
+
+            if ($attempt) {
+                $attempt->update(['teacher_feedback' => $feedback]);
+            }
+
+        }
+
         return response()->json([
-            'message' => 'Submitted attempt not found'
-        ], 404);
-    }
-
-    foreach ($data['questions'] as $item) {
-
-        TeacherAssignmentFeedback::create([
-            'attempt_id' => $attemptId,
-            'question_id' => $item['question_id'],
-            'feedback' => $item['feedback']
+            'message' => 'Feedback saved successfully'
         ]);
     }
-
-    return response()->json([
-        'message' => 'Feedback saved successfully'
-    ]);
-}
 
 }
