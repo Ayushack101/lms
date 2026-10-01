@@ -104,7 +104,9 @@ Route::middleware('auth:sanctum')->group(function () {
      Route::post('teacher/assignments/assigned/edit/{assignment_id}', 'editAssignedAssignment');
      Route::get('teacher/assignments/assigned/delete/{assignment_id}', 'deleteAssignment');
 
-     Route::get('teacher/assignments/studentanswers/{assignment_id}', 'getSubmittedAssignments');
+     // Submitted work
+
+     Route::get('teacher/assignments/studentanswers/{teacher_id}/{book_id}/{section_id}', 'getSubmittedAssignments');
      Route::post('teacher/assignments/feedback', 'storeTeacherfeedback');
      Route::get('teacher/assignments/feedback/{assignment_id}', 'getFeedback');
     });

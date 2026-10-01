@@ -89,8 +89,5 @@ class AssesmentService
 
         return redirect()->back()->with('success', 'Test deleted successfully!');
     }
-<<<<<<< HEAD
-=======
-     
->>>>>>> e88830dedcaf7a4af67a53465706b829da2a1a29
+
 }

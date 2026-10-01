@@ -12,6 +12,7 @@ class StudentAssignmentAttempt extends Model
         'student_id',
         'assignment_id',
         'status',
+        'teacher_feedback',
     ];
 
       public function student()
@@ -21,5 +22,9 @@ class StudentAssignmentAttempt extends Model
      public function assignment()
     {
         return $this->belongsTo(TeacherAssignment::class, 'assignment_id');
+    }
+    public function answers()
+    {
+        return $this->hasMany(StudentAssignmentAnswer::class, 'attempt_id');
     }
 }

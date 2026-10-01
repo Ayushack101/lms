@@ -9,7 +9,7 @@ class StudentAssignmentAnswer extends Model
     //
     protected $table = 'student_assignment_answers';
     protected $fillable = [
-        'student_assignment_attempt_id',
+        'attempt_id',
         'question_id',
         'answer',
     ];

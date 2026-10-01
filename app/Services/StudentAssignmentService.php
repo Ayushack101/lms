@@ -25,10 +25,6 @@ class StudentAssignmentService
             // Check every question
             foreach ($answers as $answer) {
 
-                if (empty($answer['answer'])) {
-                    throw new \Exception('Answer cannot be empty');
-                }
-
                 $question = AssignmentQuestion::where('id', $answer['question_id'])->where('assignment_id', $assignmentId)->first();
 
                 if (!$question) {
@@ -46,7 +42,7 @@ class StudentAssignmentService
             // Save answers
             foreach ($answers as $answer) {
                 StudentAssignmentAnswer::create([
-                    'student_assignment_attempt_id' => $attempt->id,
+                    'attempt_id' => $attempt->id,
                     'question_id' => $answer['question_id'],
                     'answer' => $answer['answer'],
                 ]);
@@ -54,7 +50,9 @@ class StudentAssignmentService
 
             DB::commit();
 
-            return $attempt;
+            return response()->json([
+                'message' => 'Assignment submitted successfully',
+            ], 201);
 
         } catch (\Exception $e) {
 

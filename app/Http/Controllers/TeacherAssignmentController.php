@@ -45,8 +45,8 @@ class TeacherAssignmentController extends Controller
     public function deleteAssignment($id){
         return $this->teacherAssignmentService->deleteAssignment($id);
     }
-    public function getSubmittedAssignments($assignmentId){
-        return $this->teacherAssignmentService->getSubmittedAssignments($assignmentId);
+    public function getSubmittedAssignments($teacherId, $bookId, $sectionId){
+        return $this->teacherAssignmentService->getSubmittedAssignments($teacherId, $bookId, $sectionId);
     }
     public function storeTeacherfeedback( Request $request){
         return $this->teacherAssignmentService->storeTeacherfeedback($request->all());
