@@ -54,7 +54,7 @@ class TeacherAssessmentController extends Controller
         return $this->teacherAssessmentService->deleteAssessment($assessmentId);
     }
 public function getSubmittedWork($teacehrId, $bookId, $sectionId){
-    return $this->teacherAssessmentService->getSubmitedWork($teacehrId,$bookId, $sectionId);
+    return $this->teacherAssessmentService->getSubmitedWork($teacehrId, $bookId, $sectionId);
 }
 public function teacherClass($teacher_id){
     return $this->teacherAssessmentService->getteacherClassByTeacher($teacher_id);

@@ -78,7 +78,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('teacher/assigned-tests/updateassessment/{assessmentId}/{studentId}', 'editSubmittedWork');
     });
 
-    // // Student Assessment routes
+    //  Student Assessment routes
     Route::controller(StudentAssessmentController::class)->group(function () {
          Route::get('student/assigned-tests/all-assigned/{teacherId}/{classId}/{sectionId}', 'index');
          Route::get('student/assigned-tests/question/{assessmentId}', 'getquestions');
@@ -91,7 +91,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     });
 
-    // // Teacher Assessment routes
+
+    //  Teacher Assessment routes
     Route::controller(TeacherAssignmentController::class)->group(function () {
      Route::get('teacher/assignments/subjects/{teacher_id}', 'subjects');
      Route::get('teacher/assignments/books/{teacher_id}/{subject_id}', 'books');
@@ -108,7 +109,7 @@ Route::middleware('auth:sanctum')->group(function () {
      Route::get('teacher/assignments/feedback/{assignment_id}', 'getFeedback');
     });
 
-    // // Student Assignment routes
+    //        Student Assignment routes
     Route::controller(StudentAssignmentController::class)->group(function () {
         Route::get('student/assignments/all-assigned/{teacherId}/{classId}/{sectionId}', 'getAssignedAssignment');
         Route::get('student/assignments/questions/{assignmentId}', 'getquestions');

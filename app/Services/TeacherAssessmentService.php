@@ -56,36 +56,37 @@ class TeacherAssessmentService
         return $assessments;
     }
 
-    public function editAssessment(int $id, array $data)
+     public function editAssessment(int $id, array $data)
+     {
+         $assessment = TeacherAssessment::where('id', $id)->update($data);
+         return $assessment;
+     }
+     public function deleteAssessment(int $id)
+     {
+         $assessment = TeacherAssessment::where('id', $id)->delete();
+         return $assessment;
+     }
+
+    public function getSubmitedWork(int $teacherId, $bookId, $sectionId)
     {
-        $assessment = TeacherAssessment::where('id', $id)->update($data);
+        $assessment = TeacherAssessment::where('teacher_id', $teacherId)->where('book_id', $bookId)->where('section_id', $sectionId)
+            ->with([
+                'testTemplate.book',
+                'studentAssessmentAttempts' => function ($query) {
+                    $query->where('is_submitted', 'submitted')
+                        ->with('answers.question', 'student');
+                }
+            ])
+            ->get();
+
         return $assessment;
     }
-    public function deleteAssessment(int $id)
-    {
-        $assessment = TeacherAssessment::where('id', $id)->delete();
-        return $assessment;
-    }
 
-    public function getSubmitedWork(int $teacherId, int $bookId , int $sectionId)
-{
-    $assessment = TeacherAssessment::where('teacher_id', $teacherId)->where('book_id', $bookId)->where('section_id', $sectionId)
-        ->with([
-            'testTemplate.book',
-            'studentAssessmentAttempts' => function ($query) {
-                $query->where('is_submitted', 'submitted')
-                    ->with('answers.question', 'student');
-            }
-        ])
-        ->get();
-
-    return $assessment;
-}
-
-public function getteacherClassByTeacher(int $teacher_id){
+    public function getteacherClassByTeacher(int $teacher_id){
         $class = Teacher::where('id', $teacher_id)->first()->classes()->get();
         return $class;
     }
+
 
     //  ** submitted work
     public function editSubmittedWork(int $assessmentId, int $studentId, array $data)
