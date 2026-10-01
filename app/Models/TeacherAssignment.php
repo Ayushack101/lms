@@ -11,12 +11,10 @@ class TeacherAssignment extends Model
     protected $fillable = [
                 'assignment_name',
                 'teacher_id',
-                'subject_id',
                 'book_id',
-                 'class_id',
-                 'section_id',
-                 'type',
-                 'end_date'
+                'class_id',
+                'section_id',
+                'end_date'
                 ];
 
     public function book()
@@ -27,11 +25,6 @@ class TeacherAssignment extends Model
     public function teacher()
     {
         return $this->belongsTo(Teacher::class);
-    }
-
-    public function subject()
-    {
-        return $this->belongsTo(Subject::class);
     }
 
     public function class()

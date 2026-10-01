@@ -6,6 +6,10 @@ use App\Services\TeacherAssignmentService;
 use Illuminate\Http\Request;
 use App\Http\Requests\TeacherAssignment\StoreAssignmentRequest;
 use App\Http\Requests\TeacherAssignment\UpdateAssignmentRequest;
+use App\Http\Resources\SubjectResource;
+use App\Http\Resources\BookResource;
+use App\Http\Resources\ClassResource;
+use App\Http\Resources\AssignmentResource;
 
 class TeacherAssignmentController extends Controller
 {
@@ -16,20 +20,25 @@ class TeacherAssignmentController extends Controller
 
     public function subjects($teacherId)
     {
-        return $this->teacherCourseService->getSubjectsByTeacher($teacherId);
+        $subjects = $this->teacherCourseService->getSubjectsByTeacher($teacherId);
+        return SubjectResource::collection($subjects);
     }
 
     public function books( $teacherId, $subjectId)
     {
-        return $this->teacherAssignmentService->getBooksByTeacher( $teacherId, $subjectId);
+       $books= $this->teacherAssignmentService->getBooksByTeacher($teacherId, $subjectId);
+       return BookResource::collection($books);
     }
 
     public function class($bookId)
     {
-        return $this->teacherAssignmentService->getClassByBookId($bookId);
+        $class = $this->teacherAssignmentService->getClassByBookId($bookId);
+        return ClassResource::collection($class);
     }
+
     public function getAssignedAssessments($teacherId){
-        return $this->teacherAssignmentService->getAssignment($teacherId);
+        $asssignment =  $this->teacherAssignmentService->getAssignment($teacherId);
+        return AssignmentResource::collection($asssignment);
     }
     public function getAssignedQuestion($assignmentId){
         return $this->teacherAssignmentService->getAssignedQuestion($assignmentId);
@@ -51,9 +60,6 @@ class TeacherAssignmentController extends Controller
     public function storeTeacherfeedback( Request $request){
         return $this->teacherAssignmentService->storeTeacherfeedback($request->all());
     }
-
-
-
 
 
 }
