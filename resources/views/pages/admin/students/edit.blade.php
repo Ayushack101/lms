@@ -252,7 +252,7 @@
                 $('.section-select').html('<option value="">Select Section</option>');
 
                 $.ajax({
-                    url: '/admin/get-sections-by-class/' + classId  ,
+                    url: '{{ url("admin/get-sections-by-class") }}/' + classId  ,
                     type: 'GET',
                     success: function (sections) {
 

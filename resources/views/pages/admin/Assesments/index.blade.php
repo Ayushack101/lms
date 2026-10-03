@@ -134,7 +134,7 @@
                                 {{-- <button type="button" data-toggle="modal" data-target="#add-teacher-modal"
                                     class='btn btn-success'><i class="fas fa-plus"></i>
                                     Add Teacher</button> --}}
-                            </div> 
+                            </div>
                             <div class="card-body">
                                 <table id="teacher-table" class="table table-bordered table-hover table-auto">
                                     <thead>
@@ -159,7 +159,7 @@
                                                 <td>{{ $book->book_name }}</td>
                                                 <td>{{ $class->class_name }}</td>
 
-                                                {{-- Objective Column --}}      
+                                                {{-- Objective Column --}}
                                                 <td>
                                                     @foreach ($objectiveTests as $test)
                                                         <div class="mb-2 d-flex align-items-center">
@@ -320,7 +320,7 @@
 
                 $('#view-questions-modal').modal('show');
 
-                $.get('/admin/test/' + testId + '/questions', function (questions) {
+                $.get('{{ url("admin/test") }}/' + testId + '/questions', function (questions) {
 
                     let html = '';
 

@@ -295,7 +295,7 @@
                                 @error('subject_books')
                                     {{ $message }}
                                 @enderror
-                            </span>  
+                            </span>
                             <button type="button" id="add-more" class="btn btn-outline-primary btn-sm mb-3">
                                 + Add Another Subject
                             </button>
@@ -405,7 +405,7 @@
                 $('.book-select').html('<option value="">Select Book</option>');
 
                 $.ajax({
-                    url: '/admin/get-subjects-by-board/' + boardId,
+                    url: '{{ url("admin/get-subjects-by-board") }}/' + boardId,
                     type: 'GET',
                     success: function(subjects) {
 
@@ -432,7 +432,7 @@
                 if (!subjectId) return;
 
                 $.ajax({
-                    url: '/admin/get-books-by-subject/' + subjectId,
+                    url: '{{ url("admin/get-books-by-subject") }}/' + subjectId,
                     type: 'GET',
                     success: function(books) {
                         let options = '';

@@ -222,7 +222,7 @@
                 $('#book_id').html('<option value="">Select Book</option>');
 
                 $.ajax({
-                    url: '/admin/get-subjects-by-board/' + boardId,
+                    url: '{{ url("admin/get-subjects-by-board") }}/' + boardId,
                     type: 'GET',
                     success: function (response) {
                         let subjects = response?.subjects || [];
@@ -250,7 +250,7 @@
                 $('#book_id').html('<option value="">Loading...</option>');
 
                 $.ajax({
-                    url: '/admin/get-books-by-subject/' + subjectId,
+                    url: '{{ url("admin/get-books-by-subject") }}/' + subjectId,
                     type: 'GET',
                     success: function (response) {
                         let books = response?.books || [];
