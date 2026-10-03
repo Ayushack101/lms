@@ -105,18 +105,15 @@ Route::middleware('auth:sanctum')->group(function () {
      Route::get('teacher/assignments/assigned/delete/{assignment_id}', 'deleteAssignment');
 
      // Submitted work
-
      Route::get('teacher/assignments/studentanswers/{teacher_id}/{book_id}/{section_id}', 'getSubmittedAssignments');
      Route::post('teacher/assignments/feedback', 'storeTeacherfeedback');
-     Route::get('teacher/assignments/feedback/{assignment_id}', 'getFeedback');
     });
 
-    //        Student Assignment routes
+    //Student Assignment routes
     Route::controller(StudentAssignmentController::class)->group(function () {
         Route::get('student/assignments/all-assigned/{teacherId}/{classId}/{sectionId}', 'getAssignedAssignment');
         Route::get('student/assignments/questions/{assignmentId}', 'getquestions');
         Route::post('student/assignments/attempt/{assignmentId}/{studentId}', 'attemptAssignment');
-
 
         // Sumbited work
 

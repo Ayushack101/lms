@@ -10,6 +10,7 @@ use App\Http\Resources\SubjectResource;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\ClassResource;
 use App\Http\Resources\AssignmentResource;
+use App\Http\Resources\AssignmentQuestionResource;
 
 class TeacherAssignmentController extends Controller
 {
@@ -18,46 +19,47 @@ class TeacherAssignmentController extends Controller
     {
     }
 
-    public function subjects($teacherId)
+    public function subjects(int $teacherId)
     {
         $subjects = $this->teacherCourseService->getSubjectsByTeacher($teacherId);
         return SubjectResource::collection($subjects);
     }
 
-    public function books( $teacherId, $subjectId)
+    public function books(int $teacherId, int $subjectId)
     {
        $books= $this->teacherAssignmentService->getBooksByTeacher($teacherId, $subjectId);
        return BookResource::collection($books);
     }
 
-    public function class($bookId)
+    public function class(int $bookId)
     {
         $class = $this->teacherAssignmentService->getClassByBookId($bookId);
         return ClassResource::collection($class);
     }
 
-    public function getAssignedAssessments($teacherId){
+    public function getAssignedAssessments(int $teacherId){
         $asssignment =  $this->teacherAssignmentService->getAssignment($teacherId);
         return AssignmentResource::collection($asssignment);
     }
-    public function getAssignedQuestion($assignmentId){
-        return $this->teacherAssignmentService->getAssignedQuestion($assignmentId);
+    public function getAssignedQuestion(int $assignmentId){
+        $questions = $this->teacherAssignmentService->getAssignedQuestion($assignmentId);
+        return AssignmentQuestionResource::collection($questions);
     }
 
     public function assignAssignment(StoreAssignmentRequest $request)
     {
     return $this->teacherAssignmentService->createAssignment($request->validated());
     }
-    public function editAssignedAssignment($id, UpdateAssignmentRequest $request ){
+    public function editAssignedAssignment(int $id, UpdateAssignmentRequest $request ){
         return $this->teacherAssignmentService->editAssignment( $id,  $request->validated() );
     }
-    public function deleteAssignment($id){
+    public function deleteAssignment(int $id){
         return $this->teacherAssignmentService->deleteAssignment($id);
     }
-    public function getSubmittedAssignments($teacherId, $bookId, $sectionId){
+    public function getSubmittedAssignments(int $teacherId, int $bookId, int $sectionId){
         return $this->teacherAssignmentService->getSubmittedAssignments($teacherId, $bookId, $sectionId);
     }
-    public function storeTeacherfeedback( Request $request){
+    public function storeTeacherfeedback(Request $request){
         return $this->teacherAssignmentService->storeTeacherfeedback($request->all());
     }
 

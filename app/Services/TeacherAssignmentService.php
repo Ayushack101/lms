@@ -20,7 +20,7 @@ class TeacherAssignmentService
     public function getBooksByTeacher(int $teacher_id, int $subjectId)
     {
         $teacher = Teacher::find($teacher_id);
-        $books = $teacher->books()->where('subject_id', $subjectId)->orderBy('id', 'asc')->with('class')->get();
+        $books = $teacher->books()->where('subject_id', $subjectId)->orderBy('id', 'asc')->get()->load('class');
         return $books;
     }
 
@@ -140,32 +140,21 @@ class TeacherAssignmentService
 
     public function storeTeacherFeedback(array $data)
     {
-        $attemptId = $data['attempt_id'];
-        $studentId = $data['student_id'];
+        $attempt = StudentAssignmentAttempt::where([
+            'id' => $data['attempt_id'],
+            'student_id' => $data['student_id'],
+            'status' => 'submitted'
+        ])->first();
 
-        $attempt = StudentAssignmentAttempt::where(['id' => $attemptId,'student_id' => $studentId, 'status' => 'submitted'])->first();
         if (!$attempt) {
             return response()->json([
                 'message' => 'Submitted attempt not found'
             ], 404);
         }
 
-        foreach ($data['feedback'] as $item) {
-            $attemptId = $item['attempt_id'];
-            $feedback = $item['feedback'];
-
-            $attempt = StudentAssignmentAnswer::where(['attempt_id' => $attemptId])->first();
-              if (!$attempt) {
-            return response()->json([
-                'message' => 'Submitted attempt not found'
-            ], 404);
-        }
-
-            if ($attempt) {
-                $attempt->update(['teacher_feedback' => $feedback]);
-            }
-
-        }
+        $attempt->update([
+            'teacher_feedback' => $data['feedback']
+        ]);
 
         return response()->json([
             'message' => 'Feedback saved successfully'

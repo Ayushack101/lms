@@ -44,10 +44,17 @@ class TeacherAssessmentController extends Controller
         return $this->teacherAssessmentService->getAssessmentByTeacher($teacherId);
     }
 
+    // public function editAssignedAssessment(updateRequest $request, $assessmentId)
+    // {
+    //     return $this->teacherAssessmentService->editAssessment($request->validated(), $assessmentId);
+    // }
     public function editAssignedAssessment(updateRequest $request, $assessmentId)
-    {
-        return $this->teacherAssessmentService->editAssessment($request->validated(), $assessmentId);
-    }
+{
+    return $this->teacherAssessmentService->editAssessment(
+        $assessmentId,
+        $request->validated()
+    );
+}
 
     public function deleteAssignedAssessment($assessmentId)
     {

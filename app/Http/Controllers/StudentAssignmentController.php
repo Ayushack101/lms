@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\StudentAssignmentService;
 use App\Http\Requests\StudentAssignment\StoreAssignmentRequest;
+Use App\Http\Resources\AssignmentResource;
+use App\Http\Resources\AssignmentQuestionResource;
 
 class StudentAssignmentController extends Controller
 {
@@ -15,11 +17,11 @@ class StudentAssignmentController extends Controller
 
     public function getAssignedAssignment($teacherId, $classId, $sectionId){
         $assignment = $this->studentAssignmentService->getAssignedAssigment($teacherId, $classId, $sectionId);
-        return $assignment;
+        return AssignmentResource::collection($assignment);
     }
     public function getquestions($assignmentId){
         $questions = $this->studentAssignmentService->getquestionsByAssignmentId($assignmentId);
-        return $questions;
+        return AssignmentQuestionResource::collection($questions);
     }
     public function attemptAssignment($assignmentId, $studentId,  StoreAssignmentRequest $request){
         $attempt = $this->studentAssignmentService->attemptAssignment($assignmentId, $studentId , $request->answers);

@@ -30,7 +30,7 @@ class updateRequest extends FormRequest
         'book_id' => 'required|exists:books,id',
         'start_date' => 'required|date',
         'end_date' => 'required|date|after_or_equal:start_date',
-        'status' => 'nullable|in:active,pending',
+        'status' => 'required|in:active,inactive',
 
         ];
     }

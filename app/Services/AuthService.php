@@ -6,7 +6,7 @@ use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;   
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -65,6 +65,12 @@ class AuthService
         } else {
             throw ValidationException::withMessages([
                 'credentials' => ['You are not authorized to access this resource.'],
+            ]);
+        }
+           // check status
+        if ($user_details->status !== 'active') {
+            throw ValidationException::withMessages([
+                'credentials' => ['Your account is not active. Please contact the administrator.'],
             ]);
         }
 
