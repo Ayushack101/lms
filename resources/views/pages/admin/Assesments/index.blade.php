@@ -285,7 +285,7 @@
 
                 if (!boardId) return;
 
-                $.get('/admin/get-subjects/' + boardId, function (subjects) {
+                $.get('{{ url("admin/get-subjects") }}/' + boardId, function (subjects) {
                     let options = '<option value="">Select Subject</option>';
                     $.each(subjects, function (_, subject) {
                         options += `<option value="${subject.id}">${subject.subject_name}</option>`;
@@ -303,7 +303,7 @@
 
                 if (!subjectId) return;
 
-                $.get('/admin/get-books/' + subjectId, function (books) {
+                $.get('{{ url("admin/get-books") }}/' + subjectId, function (books) {
                     let options = '<option value="">Select Book</option>';
                     $.each(books, function (_, book) {
                         options += `<option value="${book.id}">${book.book_name}</option>`;
