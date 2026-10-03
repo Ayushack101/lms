@@ -14,7 +14,7 @@ use App\Services\TeacherService;
 
 class AssesmentController extends Controller
 {
- 
+
     public function __construct(private AssesmentService $assesmentService, private TeacherService $teacherService, private BoardService $boardService, private SubjectService $subjectService, private BookService $bookService, private ClassesService $classesService)
     {
     }
@@ -23,7 +23,7 @@ class AssesmentController extends Controller
     {
         $data = $this->assesmentService->index();
 
-        return view('Pages.admin.Assesments.index', [
+        return view('pages.admin.Assesments.index', [
             'boards' => $data['boards'],
             'testTemplates' => $data['testTemplates'],
         ]);
@@ -38,7 +38,7 @@ class AssesmentController extends Controller
     public function getBooks(int $subject_id)
     {
         $books = $this->bookService->getBooksBySubject($subject_id);
-        return response()->json($books); 
+        return response()->json($books);
     }
 
     public function upload(UploadTestQuestionsRequest $request){
