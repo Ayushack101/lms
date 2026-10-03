@@ -47,6 +47,10 @@ class InitialDataSeeder extends Seeder
                 'allow' => 'teacher',
             ],
             [
+                'content_name' => 'E-book',
+                'allow' => 'teacher',
+            ],
+            [
                 'content_name' => 'Lesson Plan',
                 'allow' => 'teacher',
             ],
