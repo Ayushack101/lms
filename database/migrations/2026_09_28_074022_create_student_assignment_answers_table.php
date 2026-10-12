@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('attempt_id')->constrained('student_assignment_attempts')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('question_id')->constrained('assignment_questions')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('answer');
+            $table->text('answer')->nullable();
             $table->timestamps();
         });
     }
