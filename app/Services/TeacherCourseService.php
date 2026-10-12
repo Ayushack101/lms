@@ -32,9 +32,9 @@ class TeacherCourseService
     public function getContentsByTeacher(int $book_id, int $teacher_id)
     {
         $teacher = Teacher::where('id', $teacher_id)->first();
-        $contents = $teacher->books()->where('book_id', $book_id)->first()->contents()->whereIn('allow', ['both', 'teacher'])->get(); 
+        $contents = $teacher->books()->where('book_id', $book_id)->first()->contents()->whereIn('allow', ['both', 'teacher'])->get();
         return $contents;
-    }       
+    }
 
     public function getfilesByContent(int $book_id, int $content_id)
     {

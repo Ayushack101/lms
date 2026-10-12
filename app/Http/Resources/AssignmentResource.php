@@ -27,6 +27,7 @@ class AssignmentResource extends JsonResource
             'book' => $this->whenLoaded('book'),
             'class' => $this->whenLoaded('class'),
             'section' => $this->whenLoaded('section'),
+            'studentattempts' => $this->whenLoaded('studentattempts'),
             'questions' => $this->whenLoaded('assignmentQuestions'),
         ];
     }

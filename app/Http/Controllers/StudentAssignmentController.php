@@ -27,4 +27,8 @@ class StudentAssignmentController extends Controller
         $attempt = $this->studentAssignmentService->attemptAssignment($assignmentId, $studentId , $request->answers);
         return $attempt;
     }
+    public function getAnswerByAttemptId($attemptId){
+        $answers = $this->studentAssignmentService->getAnswerByAttemptId($attemptId);
+        return $answers;
+    }
 }

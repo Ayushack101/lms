@@ -29,7 +29,7 @@ class TeacherAssignmentService
         return $class;
     }
     public function getAssignment(int $teacherId){
-        $assignment = TeacherAssignment::where('teacher_id', $teacherId)->get();
+        $assignment = TeacherAssignment::where('teacher_id', $teacherId)->with('assignmentQuestions', 'book', 'class', 'section')->get();
         return $assignment;
     }
     public function getAssignedQuestion(int $assignmentId)
@@ -130,7 +130,7 @@ class TeacherAssignmentService
     public function getSubmittedAssignments(int $teacherId, int $bookId, int $sectionId)
     {
         $assignments = TeacherAssignment::where(['teacher_id' => $teacherId, 'book_id' => $bookId, 'section_id' => $sectionId])
-            ->with([ 'book', 'attempts' => function ($query) {
+            ->with([ 'book', 'studentattempts' => function ($query) {
                     $query->where('status', 'submitted')->with('answers.question', 'student');
                 }])->get();
 

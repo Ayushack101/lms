@@ -117,6 +117,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Sumbited work
 
+        Route::get('student/assignments/answers/{attemptId}', 'getAnswerByAttemptId');
+
     });
 
 });

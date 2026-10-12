@@ -40,7 +40,7 @@ class TeacherAssignment extends Model
     {
         return $this->hasMany(AssignmentQuestion::class,  'assignment_id'  );
     }
-    public function attempts()
+    public function studentattempts()
     {
         return $this->hasMany(StudentAssignmentAttempt::class,  'assignment_id' );
     }
