@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StudentController;
@@ -116,9 +117,27 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('student/assignments/attempt/{assignmentId}/{studentId}', 'attemptAssignment');
 
         // Sumbited work
-
         Route::get('student/assignments/answers/{attemptId}', 'getAnswerByAttemptId');
 
+    });
+
+
+
+    // Calendar routes
+    Route::controller(CalendarController::class)->group(function () {
+
+        Route::get('teacher/calendar/subjects/{teacherId}', 'subjects');
+        Route::get('teacher/calendar/books/{subjectId}/{teacherId}', 'books');
+        Route::get('teacher/calendar/classes/{bookId}', 'classes');
+
+
+        Route::get('teacher/calendar/all-events/{teacherId}', 'getAllEvents');
+        Route::post('teacher/calendar/events/create', 'createEvent');
+        Route::put('teacher/calendar/events/{eventId}', 'updateEvent');
+        Route::delete('teacher/calendar/events/delete/{eventId}', 'deleteEvent');
+
+        // Student side calendar events
+        Route::get('student/calendar/all-events/{teacherId}/{classId}/{sectionId}', 'getStudentEvents');
     });
 
 });
