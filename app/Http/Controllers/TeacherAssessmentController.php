@@ -14,22 +14,22 @@ class TeacherAssessmentController extends Controller
     public function __construct(private TeacherAssessmentService $teacherAssessmentService, private TeacherCourseService $teacherCourseService)
     {}
 
-    public function subjects($teacherId)
+    public function subjects(int $teacherId)
     {
         return $this->teacherCourseService->getSubjectsByTeacher($teacherId);
     }
 
-    public function books($subjectId, $teacherId)
+    public function books(int $subjectId, int $teacherId)
     {
         return $this->teacherAssessmentService->getBooksByTeacher($subjectId, $teacherId);
     }
 
-    public function class($bookId)
+    public function class(int $bookId)
     {
         return $this->teacherAssessmentService->getClassByBookId($bookId);
     }
 
-    public function tests( $bookId)
+    public function tests(int $bookId)
     {
         return $this->teacherAssessmentService->getTestsByBook($bookId);
     }
@@ -39,7 +39,7 @@ class TeacherAssessmentController extends Controller
         return $this->teacherAssessmentService->teacherAssignAssessment($request->validated());
     }
 
-    public function getAssignedAssessments($teacherId)
+    public function getAssignedAssessments(int $teacherId)
     {
         return $this->teacherAssessmentService->getAssessmentByTeacher($teacherId);
     }
@@ -48,7 +48,7 @@ class TeacherAssessmentController extends Controller
     // {
     //     return $this->teacherAssessmentService->editAssessment($request->validated(), $assessmentId);
     // }
-    public function editAssignedAssessment(updateRequest $request, $assessmentId)
+    public function editAssignedAssessment(updateRequest $request, int $assessmentId)
 {
     return $this->teacherAssessmentService->editAssessment(
         $assessmentId,
@@ -56,18 +56,18 @@ class TeacherAssessmentController extends Controller
     );
 }
 
-    public function deleteAssignedAssessment($assessmentId)
+    public function deleteAssignedAssessment(int $assessmentId)
     {
         return $this->teacherAssessmentService->deleteAssessment($assessmentId);
     }
-public function getSubmittedWork($teacehrId, $bookId, $sectionId){
+public function getSubmittedWork(int $teacehrId,  int $bookId, int  $sectionId){
     return $this->teacherAssessmentService->getSubmitedWork($teacehrId, $bookId, $sectionId);
 }
-public function teacherClass($teacher_id){
+public function teacherClass( int $teacher_id){
     return $this->teacherAssessmentService->getteacherClassByTeacher($teacher_id);
 }
 
-    public function editSubmittedWork($assessmentId, $studentId, Request $request)
+    public function editSubmittedWork( int $assessmentId,  int $studentId, Request $request)
     {
         return $this->teacherAssessmentService->editSubmittedWork($assessmentId, $studentId, $request->all());
 
