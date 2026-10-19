@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+   'onecompiler' => [
+    'key' => env('ONECOMPILER_API_KEY'),
+    'url' => env(
+        'ONECOMPILER_API_URL',
+        'https://api.onecompiler.org/v1/run'
+    ),
+    ],
+
 ];

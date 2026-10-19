@@ -29,7 +29,7 @@ class TeacherAssignmentController extends Controller
     {
        $books= $this->teacherAssignmentService->getBooksByTeacher($teacherId, $subjectId);
        return BookResource::collection($books);
-    }
+    } 
 
     public function class(int $bookId)
     {

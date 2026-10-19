@@ -5,6 +5,7 @@ use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\CodeCompilerController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\TeacherCourseController;
 use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\TeacherAssignmentController;
 use App\Http\Controllers\StudentAssignmentController;
+use App\Http\Controllers\TeacherCodingController;
 use Illuminate\Support\Facades\Route;
 
 // Unauthorized routes
@@ -130,7 +132,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('teacher/calendar/books/{subjectId}/{teacherId}', 'books');
         Route::get('teacher/calendar/classes/{bookId}', 'classes');
 
-
         Route::get('teacher/calendar/all-events/{teacherId}', 'getAllEvents');
         Route::post('teacher/calendar/events/create', 'createEvent');
         Route::put('teacher/calendar/events/{eventId}', 'updateEvent');
@@ -138,6 +139,26 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Student side calendar events
         Route::get('student/calendar/all-events/{teacherId}/{classId}/{sectionId}', 'getStudentEvents');
+    });
+
+
+
+    //  Coding Lab
+    Route::controller(CodeCompilerController::class)->group(function () {
+        Route::post('/coding-lab/run', 'run');
+    });
+
+    // Teacher Coding lab
+    Route::controller(TeacherCodingController::class)->group(function () {
+        Route::get('teacher/coding/subjects/{teacher_id}', 'subjects');
+        Route::get('teacher/coding/books/{subject_id}/{teacher_id}', 'books');
+        Route::get('teacher/coding/classes/{book_id}', 'class');
+
+        Route::post('teacher/coding/project/create', 'createproject');
+        Route::get('teacher/coding/created-project/{teacher_id}', 'CreatedProjects');
+        Route::post('teacher/coding/project/edit/{project_id}', 'updateProject');
+        Route::get('teacher/coding/project/delete/{project_id}', 'deleteProject');
+        Route::delete('teacher/coding/project/delete/{project_id}', 'deleteProject');
     });
 
 });
