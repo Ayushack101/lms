@@ -22,7 +22,7 @@ class CodeCompilerController extends Controller
             'language' => [
                 'required',
                 'string',
-                Rule::in(['python', 'java', 'mysql' , 'html', 'javascript']),
+                Rule::in(['python', 'java', 'mysql' , 'html', 'javascript', 'c', 'cpp', 'javascript']),
             ],
             'code' => 'required|string|max:100000',
             'stdin' => 'nullable|string|max:50000',

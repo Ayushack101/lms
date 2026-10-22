@@ -10,7 +10,8 @@ class CodeCompilerService
     public function run(
         string $language,
         string $code,
-        string $stdin = ''
+        string $stdin = '',
+
     ): array {
         $apiKey = config('services.onecompiler.key');
         $apiUrl = config('services.onecompiler.url');
@@ -29,6 +30,9 @@ class CodeCompilerService
             'java' => 'Main.java',
             'mysql' => 'main.sql',
             'html' => 'index.html',
+            'c'         => 'main.c',
+            'cpp'       => 'main.cpp',
+            'javascript' => 'main.js',
             default => $language,
         };
 

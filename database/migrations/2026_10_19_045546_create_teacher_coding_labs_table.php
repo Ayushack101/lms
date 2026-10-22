@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('teacher_coding_labs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->enum('language', ['html', 'python', 'java', 'mysql', 'scratch lab', 'phet simulation' , 'onlyoffice']);
+            $table->enum('language', ['html', 'python', 'java', 'mysql', 'scratch lab', 'phet simulation' , 'onlyoffice', 'c', 'cpp', 'javascript']);
             $table->foreignId('teacher_id')->constrained('teachers')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('book_id')->constrained('books')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('class_id')->constrained('classes')->cascadeOnDelete()->cascadeOnUpdate();

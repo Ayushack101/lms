@@ -16,6 +16,7 @@ use App\Http\Controllers\TeacherCourseController;
 use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\TeacherAssignmentController;
 use App\Http\Controllers\StudentAssignmentController;
+use App\Http\Controllers\StudentCodingController;
 use App\Http\Controllers\TeacherCodingController;
 use Illuminate\Support\Facades\Route;
 
@@ -159,6 +160,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('teacher/coding/project/edit/{project_id}', 'updateProject');
         Route::get('teacher/coding/project/delete/{project_id}', 'deleteProject');
         Route::delete('teacher/coding/project/delete/{project_id}', 'deleteProject');
+    });
+
+
+    //Student Coding Lab
+    Route::controller(StudentCodingController::class)->group(function () {
+        Route::get('student/coding/created-project/{teacher_id}/{class_id}/{section_id}', 'getProjetcs');
+        Route::post('student/coding/project/attempt/{project_id}/{student_id}', 'submitProject');
     });
 
 });

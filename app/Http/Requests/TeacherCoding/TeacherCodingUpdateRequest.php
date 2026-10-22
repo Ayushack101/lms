@@ -25,7 +25,7 @@ class TeacherCodingUpdateRequest extends FormRequest
         return [
             //
             'title' => 'required|string|max:255',
-            'language'=> 'required|in:html,python,java,mysql,scratch lab,phet simulation,onlyoffice',
+            'language'=> 'required|in:html,python,java,mysql,scratch lab,phet simulation,onlyoffice,c,cpp,javascript',
             'teacher_id' => 'required|exists:teachers,id',
             'book_id' => 'required|exists:books,id',
             'class_id' => 'required|exists:classes,id',
